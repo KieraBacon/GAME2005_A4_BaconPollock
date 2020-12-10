@@ -23,19 +23,22 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Queue<GameObject> GetAll()
     {
-
+        return m_pool;
     }
 
-    public GameObject Get(Vector3 position, Vector3 direction)
+    public GameObject Get()
     {
         GameObject obj = m_pool.Dequeue();
         obj.SetActive(true);
-        obj.transform.position = position;
-        obj.GetComponent<BulletBehaviour>().direction = direction;
         return obj;
+    }
+
+    public void Return(GameObject obj)
+    {
+        m_pool.Enqueue(obj);
+        obj.SetActive(false);
     }
 
     public bool Empty()

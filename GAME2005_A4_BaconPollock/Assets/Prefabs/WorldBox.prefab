@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 281922122910530947}
   - component: {fileID: 281922122910530946}
   - component: {fileID: 281922122910530949}
-  - component: {fileID: 1579704864218498231}
+  - component: {fileID: -6015289892932505070}
   m_Layer: 0
   m_Name: WorldBox
   m_TagString: Untagged
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1579704864218498231
+--- !u!114 &-6015289892932505070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 281922122910530944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec0c4cd8f735144aa165b6e6a800406, type: 3}
+  m_Script: {fileID: 11500000, guid: 729dccf97e067b141b1ac08e70c943d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0

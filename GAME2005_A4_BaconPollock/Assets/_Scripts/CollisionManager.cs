@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class CollisionManager : MonoBehaviour
 {
-    public CubeBehaviour[] actors;
+    public PhysicsBehaviour[] actors;
 
     // Start is called before the first frame update
     void Start()
     {
-        actors = FindObjectsOfType<CubeBehaviour>();
+        actors = FindObjectsOfType<PhysicsBehaviour>();
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
-    public static void CheckAABBs(CubeBehaviour a, CubeBehaviour b)
+    public static void CheckAABBs(PhysicsBehaviour a, PhysicsBehaviour b)
     {
         if ((a.min.x <= b.max.x && a.max.x >= b.min.x) &&
             (a.min.y <= b.max.y && a.max.y >= b.min.y) &&

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    // Weapon
     public Transform bulletSpawn;
-    public int fireRate;
     public ObjectPool bulletPool;
+    public float bulletSpeed;
+    public float bulletLifespan;
+    public float refireRate;
+    private float refireCD;
 
     void start()
     {
@@ -15,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        refireCD += Time.deltaTime;
         _Fire();
     }
 
@@ -23,9 +28,27 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetAxisRaw("Fire1") > 0.0f)
         {
             // delays firing
-            if (Time.frameCount % fireRate == 0)
+            if (refireCD >= refireRate)
             {
-                bulletPool.Get(bulletSpawn.position, bulletSpawn.forward);
+                if(bulletPool.Empty())
+                {
+                    Debug.Log("Bullet pool is empty!");
+                }
+                else
+                {
+                    refireCD = 0.0f;
+                    
+                    var bullet = bulletPool.Get();
+                    bullet.transform.position = bulletSpawn.position;
+                    bullet.GetComponent<PhysicsBehaviour>().velocity = bulletSpawn.forward * bulletSpeed;
+                    
+                    var returner = bullet.GetComponent<PoolReturner>();
+                    returner.pool = bulletPool;
+
+                    returner.timer = bullet.GetComponent<Timer>();
+                    returner.timer.currentTime = 0.0f;
+                    returner.timer.endTime = bulletLifespan;
+                }
             }
         }
     }
