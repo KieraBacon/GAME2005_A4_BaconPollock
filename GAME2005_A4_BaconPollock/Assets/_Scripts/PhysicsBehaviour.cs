@@ -12,18 +12,23 @@ public enum CollisionType
 [System.Serializable]
 public class PhysicsBehaviour : MonoBehaviour
 {
-    public CollisionType type;
+    public bool showDebugGizmo;
+
+    [Header("Motion")]
     public Vector3 acceleration;
     public Vector3 velocity;
-    public bool isColliding;
-    public List<PhysicsBehaviour> contacts;
     public bool GravityEnabled;
-    public bool debug;
 
-    private MeshFilter meshFilter;
-    private Bounds bounds;
-    public Vector3 max;
-    public Vector3 min;
+    [Header("Collision")]
+    public CollisionType type;
+
+    [Header("Internal")]
+    [HideInInspector] public bool isColliding;
+    [HideInInspector] public List<PhysicsBehaviour> contacts;
+    [HideInInspector] private MeshFilter meshFilter;
+    [HideInInspector] private Bounds bounds;
+    [HideInInspector] public AABB aabb;
+    [HideInInspector] public Sphere sphere;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +40,17 @@ public class PhysicsBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        max = Vector3.Scale(bounds.max, transform.localScale) + transform.position;
-        min = Vector3.Scale(bounds.min, transform.localScale) + transform.position;
+        switch (type)
+        {
+            case CollisionType.Cube:
+                aabb.mMax = Vector3.Scale(bounds.max, transform.localScale) + transform.position;
+                aabb.mMin = Vector3.Scale(bounds.min, transform.localScale) + transform.position;
+                break;
+            case CollisionType.Sphere:
+                sphere.mCentre = transform.position;
+                sphere.mRadius = transform.localScale.x * 0.5f;
+                break;
+        }
 
         _Accelerate();
         _Move();
@@ -44,9 +58,11 @@ public class PhysicsBehaviour : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (debug)
+        if (showDebugGizmo)
         {
             Gizmos.color = Color.magenta;
+            if(isColliding)
+                Gizmos.color = Color.cyan;
 
             switch (type)
             {

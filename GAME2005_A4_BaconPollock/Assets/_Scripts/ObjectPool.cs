@@ -14,7 +14,7 @@ public class ObjectPool : MonoBehaviour
     {
         m_pool = new Queue<GameObject>();
 
-        for(uint count = 0; count < MaxSize; count++)
+        for (uint count = 0; count < MaxSize; count++)
         {
             GameObject obj = Instantiate(objectType, Vector3.zero, new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
             obj.transform.SetParent(gameObject.transform);

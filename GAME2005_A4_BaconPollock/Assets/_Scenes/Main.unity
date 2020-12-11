@@ -249,6 +249,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731587873}
     m_Modifications:
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: GravityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: showDebugGizmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010021, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_Name
       value: CollisionBox (5)
@@ -259,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010022, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.59
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010022, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_LocalPosition.z
@@ -306,6 +318,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731587873}
     m_Modifications:
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: GravityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: showDebugGizmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010021, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_Name
       value: CollisionBox (1)
@@ -639,6 +659,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731587873}
     m_Modifications:
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: GravityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: showDebugGizmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010021, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_Name
       value: CollisionBox (3)
@@ -1356,6 +1384,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731587873}
     m_Modifications:
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: GravityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: showDebugGizmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010021, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_Name
       value: CollisionBox (4)
@@ -1601,6 +1637,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731587873}
     m_Modifications:
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: GravityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2164577990886926112, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
+      propertyPath: showDebugGizmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127224712685010021, guid: 36ba974b5d97c4a4985dd010e9877727, type: 3}
       propertyPath: m_Name
       value: CollisionBox (2)
