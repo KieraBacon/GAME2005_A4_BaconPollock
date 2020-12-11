@@ -27,6 +27,11 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
+
+        for (uint i = 0; i < actors.Length; i++)
+        {
+            ResolveCollisions(actors[i]);
+        }
     }
     public static bool HasIntersection(AABB a, AABB b)
     {
@@ -45,39 +50,30 @@ public class CollisionManager : MonoBehaviour
     public static bool HasIntersection(Sphere s, AABB b)
     {
         float distSq = b.MinDistSq(s.mCentre);
-        Debug.Log(distSq);
         return distSq <= (s.mRadius * s.mRadius);
     }
 
     public static bool HasIntersection(PhysicsBehaviour a, PhysicsBehaviour b)
     {
-
-
         if (a.type == CollisionType.Cube)
         {
-           // Debug.Log("a.tyoe == Cube");
             if (b.type == CollisionType.Cube)
             {
-                //Debug.Log("b.tyoe == Cube");
                 return HasIntersection(a.aabb, b.aabb);
             }
             else if (b.type == CollisionType.Sphere)
             {
-                Debug.Log("b.tyoe == sphere");
                 return HasIntersection(b.sphere, a.aabb);
             }
         }
         else if (a.type == CollisionType.Sphere)
         {
-            Debug.Log("a.tyoe == Sphere");
             if (b.type == CollisionType.Cube)
             {
-                //Debug.Log("b.tyoe == Cube");
                 return HasIntersection(a.sphere, b.aabb);
             }
             else if (b.type == CollisionType.Sphere)
             {
-                Debug.Log("b.tyoe == sphere");
                 return HasIntersection(a.sphere, b.sphere);
             }
         }
@@ -114,5 +110,34 @@ public class CollisionManager : MonoBehaviour
                 b.isColliding = false;
             }
         }
+    }
+
+    public static void ResolveCollision(PhysicsBehaviour a, PhysicsBehaviour b)
+    {
+        CollisionManifold manifold = new CollisionManifold(a, b); // The normal will point from a to b
+
+        if (manifold.mPenetration > 0.0f)
+        {
+            Debug.Log(manifold.mNormal.normalized);
+            Debug.Log(manifold.mPenetration);
+            Gizmos.DrawWireSphere(manifold.mContacts[0], manifold.mPenetration);
+        }
+
+        a.transform.position += manifold.mNormal.normalized * manifold.mPenetration;
+        b.transform.position -= manifold.mNormal.normalized * manifold.mPenetration;
+
+        //b.contacts.Remove(a);
+        //if (b.contacts.Count == 0)
+        //    b.isColliding = false;
+    }
+
+    public static void ResolveCollisions(PhysicsBehaviour obj)
+    {
+        foreach (PhysicsBehaviour collider in obj.contacts)
+        {
+            ResolveCollision(obj, collider);
+        }
+        //obj.contacts.Clear();
+        //obj.isColliding = false;
     }
 }

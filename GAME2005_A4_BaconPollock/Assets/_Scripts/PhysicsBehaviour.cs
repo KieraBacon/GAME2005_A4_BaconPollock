@@ -21,12 +21,13 @@ public class PhysicsBehaviour : MonoBehaviour
 
     [Header("Collision")]
     public CollisionType type;
+    public float mass;
 
     [Header("Internal")]
     [HideInInspector] public bool isColliding;
     [HideInInspector] public List<PhysicsBehaviour> contacts;
     [HideInInspector] private MeshFilter meshFilter;
-    [HideInInspector] private Bounds bounds;
+    [HideInInspector] public Bounds bounds;
     [HideInInspector] public AABB aabb;
     [HideInInspector] public Sphere sphere;
 
