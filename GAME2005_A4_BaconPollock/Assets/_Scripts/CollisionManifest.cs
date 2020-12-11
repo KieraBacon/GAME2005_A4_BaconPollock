@@ -45,7 +45,7 @@ public struct CollisionManifold
         }
         else if(a.type == CollisionType.Sphere && b.type == CollisionType.Sphere)
         {
-            mPenetration = 0.5f * (mNormal.magnitude - (a.sphere.mRadius + b.sphere.mRadius));
+            mPenetration = -0.5f * (mNormal.magnitude - (a.sphere.mRadius + b.sphere.mRadius));
 
             mContacts = new Vector3[1];
             float h = (0.5f + a.sphere.mRadius * a.sphere.mRadius - b.sphere.mRadius * b.sphere.mRadius) / (2.0f * mNormal.sqrMagnitude);

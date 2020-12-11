@@ -108,9 +108,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729dccf97e067b141b1ac08e70c943d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  showDebugGizmo: 0
   acceleration: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
+  GravityEnabled: 0
+  type: 0
+  mass: 100
+  bounciness: 0.5
+  friction: 0.5
   isColliding: 0
   contacts: []
-  debug: 1
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  aabb:
+    mMax: {x: 0, y: 0, z: 0}
+    mMin: {x: 0, y: 0, z: 0}
+  sphere:
+    mCentre: {x: 0, y: 0, z: 0}
+    mRadius: 0

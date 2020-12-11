@@ -13,7 +13,7 @@ public class CollisionManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         actors = FindObjectsOfType<PhysicsBehaviour>();
 
@@ -23,6 +23,8 @@ public class CollisionManager : MonoBehaviour
             {
                 if (i != j)
                 {
+                    if(actors[i].contacts.Count == 0)
+                        actors[i].isColliding = false;
                     CheckCollision(actors[i], actors[j]);
                 }
             }
@@ -118,17 +120,32 @@ public class CollisionManager : MonoBehaviour
 
         if (manifold.mPenetration > 0.0f)
         {
-            Debug.Log(manifold.mNormal.normalized);
-            Debug.Log(manifold.mPenetration);
-            Gizmos.DrawWireSphere(manifold.mContacts[0], manifold.mPenetration);
+            // Linear displacement
+            if(a.mobile)
+                a.transform.position -= manifold.mNormal.normalized * manifold.mPenetration;
+            if(b.mobile)
+                b.transform.position += manifold.mNormal.normalized * manifold.mPenetration;
+
+            // Linear Impulse
+            Vector3 vr = manifold.mVelocity;
+            Vector3 n = manifold.mNormal;
+            float vrn = Vector3.Dot(vr, n);
+            float e = Mathf.Min(a.bounciness, b.bounciness);
+            float InvMasses = (1.0f / a.mass) + (1.0f / b.mass);
+            float j = (-(1.0f + e) * vrn) / InvMasses;
+
+            // Friction
+            Vector3 t = vr - (vrn * n);
+            float jt = (-(1.0f + e) * (Vector3.Dot(vr, t))) / InvMasses;
+            float friction = Mathf.Sqrt(a.friction * b.friction);
+            jt = Mathf.Max(jt, -j * friction);
+            jt = Mathf.Min(jt, j * friction);
+
+            // Adjust velocities
+            a.velocity = a.velocity - ((jt / a.mass) * n);
+            b.velocity = b.velocity + ((jt / b.mass) * n);
         }
-
-        a.transform.position += manifold.mNormal.normalized * manifold.mPenetration;
-        b.transform.position -= manifold.mNormal.normalized * manifold.mPenetration;
-
-        //b.contacts.Remove(a);
-        //if (b.contacts.Count == 0)
-        //    b.isColliding = false;
+        b.contacts.Remove(a);
     }
 
     public static void ResolveCollisions(PhysicsBehaviour obj)
@@ -137,7 +154,6 @@ public class CollisionManager : MonoBehaviour
         {
             ResolveCollision(obj, collider);
         }
-        //obj.contacts.Clear();
-        //obj.isColliding = false;
+        obj.contacts.Clear();
     }
 }

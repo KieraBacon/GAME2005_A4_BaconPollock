@@ -101,8 +101,14 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   GravityEnabled: 1
   type: 1
+  mass: 1
+  bounciness: 0.5
+  friction: 0.5
   isColliding: 0
   contacts: []
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   aabb:
     mMax: {x: 0, y: 0, z: 0}
     mMin: {x: 0, y: 0, z: 0}

@@ -20,8 +20,11 @@ public class PhysicsBehaviour : MonoBehaviour
     public bool GravityEnabled;
 
     [Header("Collision")]
+    public bool mobile;
     public CollisionType type;
     public float mass;
+    public float bounciness;
+    public float friction;
 
     [Header("Internal")]
     [HideInInspector] public bool isColliding;
@@ -79,11 +82,13 @@ public class PhysicsBehaviour : MonoBehaviour
 
     private void _Accelerate()
     {
-        velocity += acceleration * Time.deltaTime;
+        if (mobile)
+            velocity += acceleration * Time.deltaTime;
     }
 
     private void _Move()
     {
-        transform.position += velocity * Time.deltaTime;
+        if(mobile)
+            transform.position += velocity * Time.deltaTime;
     }
 }
