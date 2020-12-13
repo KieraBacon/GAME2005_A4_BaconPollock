@@ -39,6 +39,10 @@ public class PhysicsBehaviour : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         bounds = meshFilter.mesh.bounds;
+        if (GravityEnabled)
+        {
+            acceleration.y += -9.8f;
+        }
     }
 
     // Update is called once per frame
