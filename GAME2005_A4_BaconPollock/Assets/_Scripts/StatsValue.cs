@@ -19,7 +19,7 @@ public class StatsValue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SetValue();
     }
 
     public void SetValue()

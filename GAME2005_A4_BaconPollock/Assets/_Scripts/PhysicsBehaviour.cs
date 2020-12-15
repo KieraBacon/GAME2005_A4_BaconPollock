@@ -18,6 +18,7 @@ public class PhysicsBehaviour : MonoBehaviour
     public Vector3 acceleration;
     public Vector3 velocity;
     public bool GravityEnabled;
+    [HideInInspector]private float airResistance = 0.999f;
 
     [Header("Collision")]
     public bool mobile;
@@ -49,7 +50,7 @@ public class PhysicsBehaviour : MonoBehaviour
     void Update()
     {
         switch (type)
-        {
+        {  
             case CollisionType.Cube:
                 aabb.mMax = Vector3.Scale(bounds.max, transform.localScale) + transform.position;
                 aabb.mMin = Vector3.Scale(bounds.min, transform.localScale) + transform.position;
@@ -62,6 +63,11 @@ public class PhysicsBehaviour : MonoBehaviour
 
         _Accelerate();
         _Move();
+    }
+
+    private void FixedUpdate()
+    {
+        velocity *= airResistance;
     }
 
     private void OnDrawGizmos()
@@ -95,4 +101,35 @@ public class PhysicsBehaviour : MonoBehaviour
         if(mobile)
             transform.position += velocity * Time.deltaTime;
     }
+
+    public void SetMass(float newValue)
+    {
+        mass = newValue;
+    }
+
+    public float GetMass()
+    {
+        return mass;
+    }
+
+    public void SetFriction(float newValue)
+    {
+        friction = newValue;
+    }
+
+    public float GetFriction()
+    {
+        return friction;
+    }
+
+    public void SetVelocity(Vector3 newValue)
+    {
+        velocity = newValue;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return velocity;
+    }
+
 }

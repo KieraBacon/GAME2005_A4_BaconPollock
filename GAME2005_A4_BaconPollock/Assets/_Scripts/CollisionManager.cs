@@ -120,6 +120,7 @@ public class CollisionManager : MonoBehaviour
 
         if (manifold.mPenetration > 0.0f)
         {
+            Debug.Log("RESOLVING COLLISION");
             // Linear displacement
             if(a.mobile)
                 a.transform.position -= manifold.mNormal.normalized * manifold.mPenetration;
@@ -156,4 +157,5 @@ public class CollisionManager : MonoBehaviour
         }
         obj.contacts.Clear();
     }
+
 }
